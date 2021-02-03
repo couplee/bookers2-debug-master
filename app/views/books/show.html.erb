@@ -1,16 +1,16 @@
 <div class='container'>
   <div class='errors_sentence'>
-          <% if @post_comment.errors.any? %>
-            <div id="error_explanation">
-              <h2><%= @post_comment.errors.count %> error prohibited this book from being saved:</h2>
-              <ul>
-                <% @post_comment.errors.full_messages.each do |message| %>
-                  <li><%= message %></li>
-                <% end %>
-              </ul>
-            </div>
+    <% if @post_comment.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= @post_comment.errors.count %> error prohibited this book from being saved:</h2>
+        <ul>
+          <% @post_comment.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
           <% end %>
-        </div>
+        </ul>
+      </div>
+    <% end %>
+  </div>
         
   <div class='row'>
     <div class='col-md-3'>
@@ -39,15 +39,15 @@
             </td>
           <% else %>
             <td>
-            <%= link_to book_favorites_path(@book), method: :post do %>
-            ♡<%= @book.favorites.count %>
-            <% end %>
+              <%= link_to book_favorites_path(@book), method: :post do %>
+              ♡<%= @book.favorites.count %>
+              <% end %>
             </td>
           <% end %>
           <td>コメント件数：<%= @book.post_comments.count %></td>
           <% if @user.id == current_user.id %>
-          <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success edit_book_#{@book.id}" %></td>
-          <td><%= link_to 'Destroy', book_path(@book), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger destroy_book_#{@book.id}"%></td>
+            <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success edit_book_#{@book.id}" %></td>
+            <td><%= link_to 'Destroy', book_path(@book), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger destroy_book_#{@book.id}"%></td>
           <% end %>
         </tr>
       </table>
@@ -59,16 +59,16 @@
           <table>
             <tr>
               <td>
-          <%= link_to user_path(@book.user) do %>
-          　<%= attachment_image_tag(@book.user, :profile_image, :fill, 100, 100, fallback: "no-image-icon.jpg") %><br>
-            <%= @book.user.name %>
-          <% end %>
-          </td>
-          <td><%= post_comment.comment %></td>
-          <% if post_comment.user == current_user %>
-            <td><%= link_to "Destroy", book_post_comment_path(post_comment.book, post_comment), method: :delete, class: 'btn btn-sm btn-danger' %></td>
-          <% end %>
-          </tr>
+                <%= link_to user_path(@book.user) do %>
+          　       <%= attachment_image_tag(@book.user, :profile_image, :fill, 100, 100, fallback: "no-image-icon.jpg") %><br>
+                  <%= @book.user.name %>
+                <% end %>
+              </td>
+              <td><%= post_comment.comment %></td>
+              <% if post_comment.user == current_user %>
+                <td><%= link_to "Destroy", book_post_comment_path(post_comment.book, post_comment), method: :delete, class: 'btn btn-sm btn-danger' %></td>
+              <% end %>
+            </tr>
           </table>
         </div>
       <% end %>
