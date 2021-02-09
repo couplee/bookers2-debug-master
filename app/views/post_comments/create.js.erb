@@ -1,0 +1,6 @@
+$("textarea").val("");
+<!--$("input").val("");-->
+<!--alert('createアクション');-->
+$('.comments').html("<%= j(render partial: 'books/post_comments', locals: {book: @book}) %>");
+$('.comments_counts').html("コメント件数：<%= @book.post_comments.count %>");
+
